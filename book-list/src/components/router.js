@@ -1,11 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import Aboutus from "./Aboutus";
 import App from "../App";
 import Crud from "./Crud";
 
+
 const router = createBrowserRouter([
     { path: '', element: <App/> },
-    { path: 'aboutus', element: <Aboutus/> },
     {path: 'crud', element: <Crud></Crud>}
 ]);
 

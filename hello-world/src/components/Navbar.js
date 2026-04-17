@@ -22,14 +22,15 @@ function Navbar() {
         style={{ float: "left" }}
         >
             <ul className="navbar-nav ml-auto" style={{ color: "#ffffff" }}>
-                <li className="nav-item">
-                <NavLink to={"/"} className="nav-link">
-                    Home
-                </NavLink>
-                </li>
+                
                 <li className="nav-item">
                 <NavLink to={"/aboutus"} className="nav-link">
                     About us
+                </NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink to={"/crud"} className="nav-link">
+                    Crud
                 </NavLink>
                 </li>
             </ul>
