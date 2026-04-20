@@ -24,21 +24,6 @@ function Navbar() {
             <ul className="navbar-nav ml-auto" style={{ color: "#ffffff" }}>
                 
                 <li className="nav-item">
-                <NavLink to={"/aboutus"} className="nav-link">
-                    About us
-                </NavLink>
-                </li>
-                <li className="nav-item">
-                <NavLink to={"/crud"} className="nav-link">
-                    Crud
-                </NavLink>
-                </li>
-                <li className="nav-item">
-                <NavLink to={"/blog/posts"} className={ 'nav-link '+(status => status.isActive ? 'active' : '')}>
-                    blog
-                </NavLink>
-                </li>
-                <li className="nav-item">
                     <NavLink 
                     to={"/register"} 
                     className={
