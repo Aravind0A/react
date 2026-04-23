@@ -1,6 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { removeUser } from "../store/authSlice";
+import store from "../store/store";
+import axios from "axios";
+
 
 function Navbar() {
+    let user = useSelector(store=>store.auth.user);
+    const dispatch = useDispatch ();
+    const navigate = useNavigate();
+     function logout(){
+        if(user){
+            axios.post('https://demo-blog.mashupstack.com/api/logout',{},{
+                headers:{'Authorization':"Bearer"+ user.token}
+            });
+            dispatch(removeUser());
+            navigate('/login');
+        }
+    }
     return <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <div className="navbar-brand">
             <h4>My app</h4>
@@ -49,6 +66,22 @@ function Navbar() {
                         Register
                     </NavLink>
                     </li>
+                    {user?
+                <li className="nav-item">
+                     <span className="nav-link" onClick={logout}>Logout</span>
+                </li>:
+                <li className="nav-item">
+                <NavLink 
+                to={"/login"} 
+                className={
+                    'nav-link '+
+                    (status => status.isActive ? 'active' : '')
+                } 
+                >
+                    Login
+                </NavLink>
+                </li>
+            }
             </ul>
         </div>
     </nav>;

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
+import checkAuth from "../auth/checkAuth";
 
 function EditPost() {
     const {postId} = useParams();
@@ -55,4 +56,4 @@ function EditPost() {
     </div>
 }
 
-export default EditPost;
+export default checkAuth(EditPost);

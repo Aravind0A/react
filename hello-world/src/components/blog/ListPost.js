@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import PostListItem from "./PostListItem";
+import checkAuth from "../auth/checkAuth";
 
 function ListPost(){
     let [posts, setPosts] = useState([]);
@@ -32,4 +33,4 @@ function ListPost(){
     </div>)
 }
 
-export default ListPost;
+export default checkAuth(ListPost);

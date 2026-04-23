@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Navbar from "../Navbar";
+import checkAuth from "../auth/checkAuth";
 
 function ViewPost() {
     var {postId} = useParams()
@@ -26,4 +27,4 @@ function ViewPost() {
     </div>
 }
 
-export default ViewPost;
+export default checkAuth(ViewPost);

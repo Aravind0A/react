@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
+import checkAuth from "../auth/checkAuth";
 
 function PostListItem(props) {
     function deletePost() {
@@ -17,4 +18,4 @@ function PostListItem(props) {
     </div>
 </div>
 }
-export default PostListItem;
+export default checkAuth(PostListItem);

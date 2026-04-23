@@ -1,19 +1,30 @@
 import { useState } from "react";
 import Navbar from "../Navbar";
 import axios from "axios"
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/authSlice";
+import {useNavigate} from "react-router-dom";
+import checkGuest from "./checkGuest";
+
 
 function Login(){
     let [email, setEmail] = useState('');
     let[password, setPassword] = useState('');
     let[errorMessage, setErrorMessage] = useState('');
+    let dispatch = useDispatch();
+    let navigate = useNavigate();
     function attemptLogin() {
         axios.post('https://demo-blog.mashupstack.com/api/login',{
             email:email,
             password:password
         }).then(response=>{
             setErrorMessage('')
-            console.log(response.data.token)
-            alert("login successful")
+            let user = {
+                email:email,
+                token : response.data.token
+            }
+            dispatch(setUser(user))
+            navigate("/")
         }).catch(error=>{
             if(error.response.data.errors){
                 setErrorMessage(Object.values(error.response.data.errors).join(' '))
@@ -59,4 +70,4 @@ function Login(){
     )
 }
 
-export default Login;
+export default checkGuest(Login);
