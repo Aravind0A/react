@@ -78,18 +78,22 @@ import {useEffect,useState} from 'react';
 import axios from 'axios'
 function Count(){
     const[name, setName] = useState([])
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
         axios.get("https://jsonplaceholder.typicode.com/users").then(response =>{
                 setName(response.data)
+                setLoading(false)
             });
     },[])
+   
     return(
         <div>
             <h3>list</h3>
             
-            
+            if(loading) return <p>Loading..</p>
             <ul>
             {name.map((list, index)=>{
+                
                 return <li key={index}>{list.name}</li>
             })}
             </ul>
