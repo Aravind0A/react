@@ -13,7 +13,7 @@ function StudentList(){
     }).then(response=>{
         setData(response.data)
     }).catch((error)=>{
-        console.log(error.response.data.error)
+        console.log(error.response.data.error)      
     });
 }
     return(

@@ -73,3 +73,26 @@ function Navbar() {
 }
 
 export default Navbar;
+
+import {useEffect,useState} from 'react';
+import axios from 'axios'
+function Count(){
+    const[name, setName] = useState([])
+    useEffect(()=>{
+        axios.get("https://jsonplaceholder.typicode.com/users").then(response =>{
+                setName(response.data)
+            });
+    },[])
+    return(
+        <div>
+            <h3>list</h3>
+            
+            
+            <ul>
+            {name.map((list, index)=>{
+                return <li key={index}>{list.name}</li>
+            })}
+            </ul>
+        </div>
+    )
+}
