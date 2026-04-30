@@ -36,3 +36,100 @@
     transform: rotate(360deg);
   }
 }
+.my-form{
+  text-align: center;
+}
+.my-table{
+  text-align: center;
+}
+
+.my-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.my-table th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.my-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.my-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.my-table button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.my-table button:hover {
+    background-color: #2980b9;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+.my-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-form label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.my-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.my-form input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52,152,219,0.3);
+}
+
+.my-form button {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.my-form button:hover {
+    background-color: #2980b9;
+}
+
+.heading{
+  text-align: center;
+}
