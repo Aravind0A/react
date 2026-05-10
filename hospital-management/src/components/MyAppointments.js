@@ -1,6 +1,55 @@
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import axios from "axios";
+
 
 function MyAppointment(){
+
+    let doctorName = localStorage.getItem("docName");
+    let[errorMessage, setErrorMessage] = useState('');
+    let userId = localStorage.getItem("userId");
+    let token = localStorage.getItem("token");
+    let appointmentDate = localStorage.getItem("appointmentDate");
+    let[appointments, setAppointments] = useState([]);
+    let appointmentId = localStorage.getItem("appointmentId");
+    console.log("appointmentDate: " + appointmentDate);
+    console.log("doctorName: " + doctorName);
+    console.log("appointmentId: " + appointmentId);
+
+    useEffect(()=>{
+        axios.get(`http://localhost:8080/allAppointments/${userId}`,{
+            headers : {Authorization: 'Bearer '+token}
+        }).then(response =>{
+            setErrorMessage('');
+            setAppointments(response.data);
+            console.log("daa "+response.data);
+        }).catch(error=>{
+            if(error.response.data.errors){
+                setErrorMessage(Object.values(error.response.data.errors).join(' '));
+            } else{
+                setErrorMessage("failed to connect to api");
+            }
+        }) 
+    }, [])  
+
+    let handleCancel = (appointmentId) =>{
+        axios.delete(`http://localhost:8080/appointments/${appointmentId}`,{
+            headers : {Authorization: 'Bearer '+token}
+        }).then(response =>{
+            setErrorMessage('');
+            alert("Appointment cancelled successfully");
+            setAppointments(appointments.filter(appointment => appointment.id !== appointmentId));
+        }).catch(error=>{
+            if(error.response.data.errors){
+                setErrorMessage(Object.values(error.response.data.errors).join(' '));
+            } else{
+                setErrorMessage("failed to connect to api");
+            }
+        })
+    }
+    let upComingDate = appointments.filter(appointment => new Date(appointment.appointmentDate) >= new Date());
+    let pastDate = appointments.filter(appointment => new Date(appointment.appointmentDate) < new Date());
+
     return(
         <div>
             <Navbar/>
@@ -12,6 +61,7 @@ function MyAppointment(){
                             <div className="card-header bg-primary text-white fw-bold" style={{textAlign:'center'}}>
                                 My Appointments
                             </div>
+                            {errorMessage?<div className = "alert alert-danger">{errorMessage}</div>:''}
                             <div className="card-body p-0">
                                 <div className="card-header bg-success text-white fw-bold">
                                 Upcoming
@@ -24,22 +74,15 @@ function MyAppointment(){
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>A</td>
-                                            <td>14/12/2026</td>
-                                            <td>
-                                                <button className="btn btn-danger btn-sm">Cancel</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>B</td>
-                                            <td>12/12/2026</td>
-                                            <td>
-                                                <button className="btn btn-danger btn-sm">Cancel</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                    {upComingDate.length>0?(upComingDate.map(appointment => (
+                                <tr key={appointment.id}>
+                                    <td>{appointment.doctors?.doctorName}</td>
+                                    <td>{appointment.appointmentDate}</td>
+                                    <td>
+                                        <button onClick={() => handleCancel(appointment.id)} className="btn btn-danger btn-sm">Cancel</button>
+                                    </td>
+                                </tr>
+                            ))):<div className="alert alert-info m-3">No upcoming appointments</div>}
                                 </table>
 
                             </div>
@@ -54,16 +97,13 @@ function MyAppointment(){
                                             <th>Date</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>A</td>
-                                            <td>14/12/2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td>B</td>
-                                            <td>12/12/2024</td>
-                                        </tr>
-                                    </tbody>
+                                    {pastDate.length>0?(pastDate.map(appointment => (
+                                <tr key={appointment.id}>
+                                    <td>{appointment.doctors?.doctorName}</td>
+                                    <td>{appointment.appointmentDate}</td>
+                                </tr>
+                            ))):<div className="alert alert-info m-3">No past appointments</div>}
+                                   
                                 </table>
 
                             </div>

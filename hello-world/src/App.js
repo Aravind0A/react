@@ -13,4 +13,17 @@ return(
 );
           
 }
-export default App
+export default App;
+
+function color(){
+  const[text, setText] = useState('');
+  
+  return(
+    <div>
+      <p>{text.length}</p>
+      {text.length > 100 && <p>Too long!</p>}
+      <textarea onInput={(e)=>{setText(e.target.value)}}></textarea>
+      
+    </div>
+  )
+}
