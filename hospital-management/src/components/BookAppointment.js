@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import checkAuth from "./auth/checkAuth";
 
 function BookAppointment(){
 
@@ -15,8 +16,7 @@ function BookAppointment(){
 
     let handleSubmit = (e)=>{
     e.preventDefault();
-    console.log("userId:", userid);   
-    console.log("docId:", doctorid);
+
         axios.post("http://localhost:8080/bookappointments",{
             userId : Number(userid),
             doctorId : Number(doctorid),
@@ -81,4 +81,4 @@ function BookAppointment(){
     )
 }
 
-export default BookAppointment;
+export default checkAuth(BookAppointment);

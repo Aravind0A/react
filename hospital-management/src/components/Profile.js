@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import checkAuth from "./auth/checkAuth";
 
 function Profile(){
 
@@ -72,4 +73,4 @@ function Profile(){
     )
 }
 
-export default Profile;
+export default checkAuth(Profile);

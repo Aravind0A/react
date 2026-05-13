@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
+import checkAuth from "./auth/checkAuth";
 
 
 function MyAppointment(){
@@ -12,9 +13,6 @@ function MyAppointment(){
     let appointmentDate = localStorage.getItem("appointmentDate");
     let[appointments, setAppointments] = useState([]);
     let appointmentId = localStorage.getItem("appointmentId");
-    console.log("appointmentDate: " + appointmentDate);
-    console.log("doctorName: " + doctorName);
-    console.log("appointmentId: " + appointmentId);
 
     useEffect(()=>{
         axios.get(`http://localhost:8080/allAppointments/${userId}`,{
@@ -22,7 +20,6 @@ function MyAppointment(){
         }).then(response =>{
             setErrorMessage('');
             setAppointments(response.data);
-            console.log("daa "+response.data);
         }).catch(error=>{
             if(error.response.data.errors){
                 setErrorMessage(Object.values(error.response.data.errors).join(' '));
@@ -116,4 +113,4 @@ function MyAppointment(){
     )
 }
 
-export default MyAppointment;
+export default checkAuth(MyAppointment);

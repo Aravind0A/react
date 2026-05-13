@@ -2,13 +2,13 @@ import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import checkAuth from "./auth/checkAuth";
 
 function DoctorList(){
      let [errorMessage, setErrorMessage] = useState('');
      let token = localStorage.getItem("token");
      let userId = localStorage.getItem("userId");
      let[doc, setDoc]= useState([]);
-    console.log("ada " + userId);
     let navigate = useNavigate();
     useEffect(()=>{
         axios.get("http://localhost:8080/doctorList",{
@@ -16,8 +16,6 @@ function DoctorList(){
         }).then(response=>{
             setErrorMessage('');
             setDoc(response.data);
-        //     console.log(response.data.getItem("docId"));
-        //    console.log(response.data[0].id);
         }).catch(error=>{
             if(error.response.data.errors){
                 setErrorMessage(Object.values(error.response.data.errors).join(''));
@@ -43,6 +41,7 @@ function DoctorList(){
                     {doc.map((doctor) => (
                         <div className="col-md-4" key={doctor.id}>
                             <div className="card border-primary shadow-sm">
+                                <img src={`http://localhost:8080${doctor.image}`} className="card-img-top" alt={doctor.doctorName} style={{height: "250px", objectFit: "cover"}}/>
                                 <div className="card-header bg-primary text-white fw-bold">
                                     {doctor.doctorName}
                                 </div>
@@ -61,5 +60,5 @@ function DoctorList(){
     )
 }
 
-export default DoctorList;
+export default checkAuth(DoctorList);
 

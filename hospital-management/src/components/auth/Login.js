@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import {useNavigate} from "react-router-dom";
 import { setUser } from "../store/authSlice";
+import checkGuest from "./checkGuest";
 
 function Login(){
 
@@ -72,4 +73,4 @@ function Login(){
     )
 }
 
-export default Login;
+export default checkGuest(Login);
