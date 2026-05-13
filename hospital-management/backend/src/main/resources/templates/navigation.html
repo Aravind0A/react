@@ -1,0 +1,10 @@
+<nav th:fragment="navigation" style="background: #1a1a2e; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px; margin-bottom: 24px;">
+    <span style="font-size: 15px; font-weight: 500; color: #ffffff;">Hospital Management</span>
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 4px;">
+        <li><a th:href="@{/createAdmin}" class="nav-link">Home</a></li>
+        <li><a th:href="@{/appointments}" class="nav-link">Appointments</a></li>
+        <li><a th:href="@{/doctors}" class="nav-link">Doctors</a></li>
+        <li><a th:href="@{/users}" class="nav-link">Users</a></li>
+        <li style="margin-left: 8px;"><a th:href="@{/logout}" class="nav-link-danger">Logout</a></li>
+    </ul>
+</nav>

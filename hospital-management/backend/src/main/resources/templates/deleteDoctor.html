@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Delete Doctor</title>
+</head>
+<body>
+
+<div th:replace="navigation :: navigation"></div>
+
+<div class="page-wrapper">
+    <div class="page-card" style="max-width: 480px;">
+        <div class="page-header">
+            <h2>Delete Doctor</h2>
+            <p>This action cannot be undone</p>
+        </div>
+
+        <div class="alert-message">
+            Are you sure you want to delete <strong th:text="${doctor.doctorName}"></strong>?
+        </div>
+
+        <form th:action="@{/delete/doctor/{id}(id=${doctor.id})}" method="post" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button type="submit" class="btn-delete-full">Yes, Delete</button>
+            <a th:href="@{/doctors}" class="btn-cancel">Cancel</a>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

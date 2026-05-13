@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Add Doctor</title>
+</head>
+<body>
+
+<div th:replace="navigation :: navigation"></div>
+
+<div class="page-wrapper">
+    <div class="page-card">
+        <div class="page-header">
+            <h2>Add Doctor</h2>
+            <p>Fill in the details to register a new doctor</p>
+        </div>
+
+        <div class="alert-message" th:if="${message}" th:text="${message}"></div>
+
+        <form th:action="@{/addDoctor}" method="post" class="login-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="doctorName">Name</label>
+                    <input type="text" id="doctorName" name="doctorName" placeholder="Enter doctor name" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" placeholder="Enter age" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="specialization">Specialization</label>
+                    <input type="text" id="specialization" name="specialization" placeholder="e.g. Cardiology" required>
+                </div>
+                <div class="form-group">
+                    <label for="qualification">Qualification</label>
+                    <input type="text" id="qualification" name="qualification" placeholder="e.g. MBBS, MD" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience</label>
+                <input type="text" id="experience" name="experience" placeholder="e.g. 5 years" required>
+            </div>
+			<div class="form-group">
+			    <label for="image">image</label>
+			    <input type="text" id="image" name="image" placeholder="upload doctor image" required>
+			 </div>
+            <button type="submit" class="login-btn">Add Doctor</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

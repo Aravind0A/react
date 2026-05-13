@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Users</title>
+</head>
+<body>
+
+<div th:replace="navigation :: navigation"></div>
+
+<div class="page-wrapper">
+    <div class="page-card">
+        <div class="page-header">
+            <h2>Users</h2>
+            <p>All registered users</p>
+        </div>
+
+        <div th:if="${#lists.isEmpty(users)}" class="alert-message">
+            No users found.
+        </div>
+
+        <table class="data-table" th:unless="${#lists.isEmpty(users)}">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user, i : ${users}">
+                    <td th:text="${i.count}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td class="action-btns">
+                        <a th:href="@{/view/user/{id}(id=${user.id})}" class="btn-view">View</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

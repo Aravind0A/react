@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>View Doctor</title>
+</head>
+<body>
+
+<div th:replace="navigation :: navigation"></div>
+
+<div class="page-wrapper">
+    <div class="page-card">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h2>Doctors</h2>
+                <p>View all doctor details</p>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(doctors)}" class="alert-message">
+            No doctors found.
+        </div>
+
+        <table class="data-table" th:unless="${#lists.isEmpty(doctors)}">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Qualification</th>
+                    <th>Specialization</th>
+                    <th>Experience</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="doctor, i : ${doctors}">
+                    <td th:text="${i.count}"></td>
+                    <td th:text="${doctor.doctorName}"></td>
+                    <td th:text="${doctor.age}"></td>
+                    <td th:text="${doctor.qualification}"></td>
+                    <td th:text="${doctor.specialization}"></td>
+                    <td th:text="${doctor.experience}"></td>
+                    <td class="action-btns">
+                        <a th:href="@{/delete/doctor/{id}(id=${doctor.id})}" class="btn-delete">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
