@@ -51,7 +51,8 @@ npm start
 ```
 
 Frontend runs on `http://localhost:3000`  
-Backend runs on `http://localhost:8080`
+Backend runs on `http://localhost:8080` 
+Backend login email- admin@gmail.com, pwd- admin@123
 
 ## API Endpoints
 
