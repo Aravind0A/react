@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +89,7 @@ public class AdminController {
 		return "addEditDoctor";
 	}
 	
+	@CacheEvict(value = "doctorsList", allEntries = true)
 	@PostMapping("/addDoctor")
 	public String addDoctors(Doctors doctors, Model model) {
 		Doctors doc = new Doctors();
@@ -101,6 +104,7 @@ public class AdminController {
 		return "addEditDoctor";
 	}
 	
+	@Cacheable(value = "doctorsList")
 	@GetMapping("/doctors")
 	public String viewAllDoctor(Doctors doctor, Model model) {
 		List<Doctors> doctors = doctorRepository.findAll();
@@ -109,6 +113,7 @@ public class AdminController {
 	}
 	
 	
+	@Cacheable(value = "singleDoctor", key = "#id")
 	@GetMapping("/view/doctor/{id}")
 	public String viewDoctor(@PathVariable Long id, Model model) {
 		Optional<Doctors> doctor = doctorRepository.findById(id);
@@ -135,6 +140,8 @@ public class AdminController {
 			return "redirect:/doctors";
 		}
 	}
+
+	@CacheEvict(value = {"doctorsList", "singleDoctor"}, key = "#id", allEntries = true)
 	@PostMapping("/edit/doctor/{id}")
 	public String editDoctor(@PathVariable Long id, Doctors doctor, Model model) {
 		Optional<Doctors> doctor1 = doctorRepository.findById(id);
@@ -186,6 +193,8 @@ public class AdminController {
 		}
 		return "redirect:/doctors";
 	}
+
+	@CacheEvict(value = {"doctorsList", "singleDoctor"}, key = "#id", allEntries = true)
 	@PostMapping("/delete/doctor/{id}")
 	public String deleteDoctor(@PathVariable Long id) {
 		doctorRepository.deleteById(id);
